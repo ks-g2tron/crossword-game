@@ -18,6 +18,7 @@ export default function Home() {
   const [isComplete, setIsComplete] = useState(false);
   const [hintUsed, setHintUsed] = useState(false);
   const [puzzleKey, setPuzzleKey] = useState(0);
+  const [timerStarted, setTimerStarted] = useState(false);
 
   const crossword = useMemo(() => {
     const clues = puzzleSets[theme][difficulty];
@@ -33,6 +34,7 @@ export default function Home() {
     setSelectedClue(null);
     setIsComplete(false);
     setHintUsed(false);
+    setTimerStarted(false);
   }, [crossword]);
 
   const handleCellChange = useCallback((row: number, col: number, value: string) => {
@@ -41,7 +43,11 @@ export default function Home() {
       next[row][col] = value;
       return next;
     });
-  }, []);
+    // Start timer on first user input
+    if (!timerStarted && value) {
+      setTimerStarted(true);
+    }
+  }, [timerStarted]);
 
   // Check completion
   useEffect(() => {
@@ -112,6 +118,7 @@ export default function Home() {
               isComplete={isComplete && !showSolution}
               difficulty={difficulty}
               resetKey={puzzleKey}
+              hasStarted={timerStarted}
             />
         </div>
       </header>

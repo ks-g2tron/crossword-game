@@ -8,6 +8,7 @@ interface Props {
   isComplete: boolean;
   difficulty: Difficulty;
   resetKey: number;
+  hasStarted: boolean;
 }
 
 function getCompletionFeedback(difficulty: Difficulty, seconds: number): string {
@@ -32,10 +33,10 @@ export default function Timer({ isRunning, isComplete, difficulty, resetKey }: P
   }, [resetKey]);
 
   useEffect(() => {
-    if (!isRunning) return;
+    if (!isRunning || !hasStarted) return;
     const interval = setInterval(() => setSeconds(s => s + 1), 1000);
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, hasStarted]);
 
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
