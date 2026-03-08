@@ -106,7 +106,12 @@ export default function Home() {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <h1 className="text-2xl font-bold text-indigo-700">Crossword Puzzle</h1>
-          <Timer isRunning={!showSolution && !isComplete} />
+          <Timer
+              isRunning={!showSolution && !isComplete}
+              isComplete={isComplete && !showSolution}
+              difficulty={difficulty}
+              resetKey={puzzleKey}
+            />
         </div>
       </header>
 
