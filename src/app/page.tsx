@@ -7,6 +7,7 @@ import CrosswordGridComponent from '@/components/CrosswordGrid';
 import ClueList from '@/components/ClueList';
 import Timer from '@/components/Timer';
 import { exportToPDF } from '@/lib/pdfExport';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [theme, setTheme] = useState<Theme>('ocean');
@@ -209,9 +210,7 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="text-center py-4 text-gray-400 text-sm">
-        Crossword Puzzle Game
-      </footer>
+      <Footer />
     </div>
   );
 }
